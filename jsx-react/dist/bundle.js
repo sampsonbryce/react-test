@@ -50,34 +50,52 @@
 	
 	var _list2 = _interopRequireDefault(_list);
 	
+	var _input = __webpack_require__(2);
+	
+	var _input2 = _interopRequireDefault(_input);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var search = React.createClass({
-	    displayName: 'search',
-	    constructor: function constructor() {
-	        this.state = { 'name': 'bob', 'job': 'coder' };
+	var Container = React.createClass({
+	    displayName: 'Container',
+	    getInitialState: function getInitialState() {
+	        return this.state = {
+	            'todo_items': ['groceries', 'apples']
+	        };
 	    },
-	
-	    handleKeyPress: function handleKeyPress(e) {
-	        if (e.keyCode === 13) {
-	            e.preventDefault;
-	            console.log('enter pressed');
-	        }
-	    },
-	
 	    render: function render() {
-	        console.log(this.props);
-	        console.log(this.handleKeyPress);
-	        return React.createElement('div', {
-	            className: "row text-center",
-	            id: "search"
-	        }, React.createElement('input', {
-	            onKeyUp: this.handleKeyPress
-	        }));
+	        console.log('list', _list2.default);
+	        console.log('state items', this.state.todo_items);
+	        return;
+	        React.createElement(
+	            'div',
+	            null,
+	            React.createElement('search', { id: 'search', enterPressed: this.addNewItem }),
+	            React.createElement('todo_list', { items: this.state.todo_items })
+	        );
+	
+	        // return React.createElement('div', {}, React.createElement(search, {
+	        //         'enter_pressed': this.addNewItem,
+	        //         'input_text': this.state.input_text
+	        //     }),
+	        //     React.createElement(todo_list, {
+	        //         'items': this.state.todo_items
+	        //     })
+	        // )
+	    },
+	
+	
+	    addNewItem: function addNewItem(val) {
+	        console.log('enter pressed');
+	        var items = this.state.todo_items;
+	        items.push(val);
+	        this.setState({ 'todo_items': items });
+	        console.log('container state', this.state);
 	    }
+	
 	});
 	
-	ReactDOM.render(React.createElement('div', {}, React.createElement(search, null), React.createElement(_list2.default, null)), document.getElementById('react-app'));
+	ReactDOM.render(React.createElement(Container, null), document.getElementById('react-app'));
 
 /***/ },
 /* 1 */
@@ -85,14 +103,47 @@
 
 	'use strict';
 	
-	var list = React.createClass({
-	  displayName: 'list',
-	  render: function render() {
-	    return React.createElement('ul', {}, 'Coconuts');
-	  }
+	var todo_list = React.createClass({
+	    displayName: 'todo_list',
+	    render: function render() {
+	        console.log('list-props', this.props);
+	        return React.createElement('ul', {}, this.props.items.map(function (value, index) {
+	            console.log('adding item', value);
+	            return React.createElement('li', { key: value }, value);
+	        }));
+	    }
 	});
 	
-	module.exports = list;
+	module.exports = todo_list;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var search = React.createClass({
+	    displayName: "search",
+	    handleKeyPress: function handleKeyPress(e) {
+	        if (e.keyCode === 13) {
+	            e.preventDefault;
+	            var value = this.refs.todo_input.value;
+	            this.props.enterPressed(value);
+	        }
+	    },
+	
+	    render: function render() {
+	        return React.createElement('div', {
+	            className: "row text-center",
+	            id: "search"
+	        }, React.createElement('input', {
+	            onKeyUp: this.handleKeyPress,
+	            ref: 'todo_input'
+	        }));
+	    }
+	});
+	
+	module.exports = search;
 
 /***/ }
 /******/ ]);

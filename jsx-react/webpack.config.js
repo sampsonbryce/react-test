@@ -1,5 +1,5 @@
 module.exports = {
-    entry: __dirname + "/src/js/container.js",
+    entry: __dirname + "/src/js/container.jsx",
     devtool: 'source-map',
     output: {
         path: __dirname + "/dist",
@@ -7,7 +7,7 @@ module.exports = {
     },
     module: {
         loaders: [{
-            test: /\.js$/,
+            test: /\.jsx$/,
             exclude: /node_modules/,
             loader: "babel-loader",
             query: {
