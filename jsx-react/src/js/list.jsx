@@ -1,12 +1,23 @@
+import TodoListModel from './models.js';
+
 var TodoList = React.createClass({
+    mixins: [Backbone.React.Component.mixin],
+    
+    getInitialState() {
+        return {todos: TodoListModel.getAllItems()}
+    },
+    componentWillMount() {
+        TodoListModel.on("change", () => {
+            this.setState({todos: TodoListModel.getAllItems()});
+        });
+    },
 
     render() {
-        console.log('list-props', this.props);
         return (
             <ul>
-                {this.props.items.map((value, index) => {
+                {this.state.todos.map((value, index) => {
                     console.log('adding item', value);
-                    return <li key={value}>{value}</li>
+                    return <li key={value.id}>{value.name}</li>
                 })}
             </ul>
             );
