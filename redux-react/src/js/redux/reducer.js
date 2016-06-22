@@ -1,10 +1,12 @@
+import undoable, { distinctState } from 'redux-undo'
+
 function getId(state){
     return state.todos.reduce((maxId, todo) => {
         return Math.max(todo.id, maxId)
     }, -1) + 1
 }
 
-export default function reducer(state, action){
+const reducer = (state, action) => {
     console.log('action', action);
     switch (action.type){
         case 'ADD_TODO':
@@ -19,3 +21,9 @@ export default function reducer(state, action){
             return state;
     }
 }
+
+const undoableReducer = undoable(reducer,{
+    filter: distinctState()
+})
+
+export default undoableReducer

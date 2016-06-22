@@ -1,5 +1,5 @@
 import React from 'react'
-import Actions from '../redux/actions.js'
+//import Actions from '../redux/actions.js'
 
 var Search = React.createClass({
     handleKeyPress(e) {
@@ -9,7 +9,7 @@ var Search = React.createClass({
             console.log('enter pressed');
             var value = this.refs.todo_input.value;
             console.log('value', value);
-            this.props.dispatch(Actions.addTodo(value));
+            //this.props.dispatch(Actions.addTodo(value));
         }
     },
     render() {
