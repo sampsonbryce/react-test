@@ -27,13 +27,12 @@ const mapStateToProps = (state) => {
     console.log('giving present', state.present);
     //if you connect and only want the component to know about a piece of the model
     //do that here
-    return state.present;
+    return state.present.todo;
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         addTodo: (text) => dispatch(Actions.addTodo(text)),
-        incCount: () => dispatch(Actions.incCount())
     }
 }
 
