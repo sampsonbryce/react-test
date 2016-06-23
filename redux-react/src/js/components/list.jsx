@@ -2,14 +2,22 @@ import React from 'react';
 
 var TodoList = React.createClass({
     render() {
-        console.log('list props', this.props);
+        console.log('listprops', this.props);
         return (
-            <ul>
-                {this.props.todos.map((todo, index) => {
-                    console.log('adding todo', todo);
-                    return <li key={todo.id}>{todo.text}</li>
-                })}
-            </ul>
+            <div className='row text-center'>
+                <ul className='no-bullets'>
+                    {this.props.todos.map((todo, index) => {
+                        return (
+                            <li key={todo.id}>
+                                <button className='black-text' onClick={this.props.removeTodo.bind(this, todo.id)}>X</button>
+                                {todo.text}
+                                <input type='checkbox' onChange={this.props.completedToggle.bind(this, todo.id)} checked={todo.completed} />
+                                Completed
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
         );
     }
 })
