@@ -9,7 +9,8 @@ var Search = React.createClass({
             console.log('enter pressed');
             var value = this.refs.todo_input.value;
             console.log('value', value);
-            //this.props.dispatch(Actions.addTodo(value));
+            this.props.addTodo(value);
+            this.props.incCount();
         }
     },
     render() {

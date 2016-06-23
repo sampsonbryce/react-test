@@ -4,11 +4,7 @@ import Container from './components/container.jsx'
 import configureStore from './redux/store.js'
 import {Provider} from 'react-redux'
 
-let initialState = {
-    todos: []
-};
-
-let store = configureStore(initialState);
+let store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>

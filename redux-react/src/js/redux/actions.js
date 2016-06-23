@@ -4,6 +4,11 @@ var Actions = {
             type: 'ADD_TODO',
             text: text
         }
+    },
+    incCount(){
+        return {
+            type: 'INCREMENT_COUNT',
+        }
     }
 }
 
